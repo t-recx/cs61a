@@ -106,3 +106,12 @@
         (+ (twenty-one strategy) (play-n strategy (- n 1)))))
 
 (play-n stop-at-17 3)
+
+(define (dealer-sensitive customer-hand dealer-up-card)
+    (let (
+            (is-picture (picture? dealer-up-card)) 
+            (dealer-card-rank (rank dealer-up-card)) 
+            (best-total-customer (best-total customer-hand)))
+        (or (and (< best-total-customer 17) (or is-picture (> dealer-card-rank 6)))
+            (and (< best-total-customer 12) (member? dealer-card-rank '(2 3 4 5 6))))
+    ))
