@@ -122,3 +122,22 @@
 
 ((stop-at 17) '(AD 4S) 'AS) ; should return true
 ((stop-at 17) '(AD 5S) 'AS) ; should return false
+
+(define (suit card)
+    (last card))
+
+(define (has-suit hand suit-filter)
+    (cond 
+        ((empty? hand)
+            #f)
+        ((equal? (suit (first hand)) suit-filter)
+            #t)
+        (else (has-suit (bf hand) suit-filter))))
+
+(has-suit '(AD 4S) 'H)
+(has-suit '(AD 2H 4S) 'H)
+
+(define (valentine customer-hand dealer-up-card)
+    (if (has-suit customer-hand 'H)
+        ((stop-at 19) customer-hand dealer-up-card)
+        ((stop-at 17) customer-hand dealer-up-card)))
