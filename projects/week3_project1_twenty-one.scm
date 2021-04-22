@@ -141,3 +141,11 @@
     (if (has-suit customer-hand 'H)
         ((stop-at 19) customer-hand dealer-up-card)
         ((stop-at 17) customer-hand dealer-up-card)))
+
+(define (suit-strategy s strategy-if-not-suit strategy-if-suit)
+    (lambda (customer-hand dealer-up-card)
+        (if (has-suit customer-hand s)
+            (strategy-if-suit customer-hand dealer-up-card)
+            (strategy-if-not-suit customer-hand dealer-up-card))))
+
+(define alt-valentine (suit-strategy 'H (stop-at 17) (stop-at 19)))
