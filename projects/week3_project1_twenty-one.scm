@@ -115,3 +115,10 @@
         (or (and (< best-total-customer 17) (or is-picture (> dealer-card-rank 6)))
             (and (< best-total-customer 12) (member? dealer-card-rank '(2 3 4 5 6))))
     ))
+
+(define (stop-at n)
+    (lambda (customer-hand dealer-up-card)
+        (< (best-total (se customer-hand dealer-up-card)) n)))
+
+((stop-at 17) '(AD 4S) 'AS) ; should return true
+((stop-at 17) '(AD 5S) 'AS) ; should return false
