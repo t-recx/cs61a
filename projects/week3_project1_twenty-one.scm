@@ -149,3 +149,13 @@
             (strategy-if-not-suit customer-hand dealer-up-card))))
 
 (define alt-valentine (suit-strategy 'H (stop-at 17) (stop-at 19)))
+
+(define (majority s1 s2 s3)
+    (lambda (customer-hand dealer-up-card)
+        (let (
+            (s1-result (s1 customer-hand dealer-up-card))
+            (s2-result (s2 customer-hand dealer-up-card))
+            (s3-result (s3 customer-hand dealer-up-card)))
+            (or (and s1-result s2-result) (and s2-result s3-result) (and s1-result s3-result)))))
+
+(play-n (majority valentine stop-at-17 dealer-sensitive) 3)
