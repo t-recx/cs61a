@@ -159,3 +159,10 @@
             (or (and s1-result s2-result) (and s2-result s3-result) (and s1-result s3-result)))))
 
 (play-n (majority valentine stop-at-17 dealer-sensitive) 3)
+
+(define (reckless strategy)
+    (lambda (customer-hand dealer-up-card)
+        (strategy (bl customer-hand) dealer-up-card)))
+
+((reckless (stop-at 17)) '(AD 5S) 'AS) ; should return true
+((reckless (stop-at 17)) '(AD 5S 1S) '1S) ; should return false
