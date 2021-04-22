@@ -93,3 +93,9 @@
 (best-total '(AD 8S AC 2S))
 (best-total '(AD AS 9H))
 (best-total '(AD AS AH AC))
+
+(define (stop-at-17 customer-hand dealer-up-card)
+    (< (best-total (se customer-hand dealer-up-card)) 17))
+
+(stop-at-17 '(AD 4S) 'AS) ; should return true
+(stop-at-17 '(AD 5S) 'AS) ; should return false
