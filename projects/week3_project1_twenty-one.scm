@@ -99,3 +99,10 @@
 
 (stop-at-17 '(AD 4S) 'AS) ; should return true
 (stop-at-17 '(AD 5S) 'AS) ; should return false
+
+(define (play-n strategy n)
+    (if (= n 0)
+        0
+        (+ (twenty-one strategy) (play-n strategy (- n 1)))))
+
+(play-n stop-at-17 3)
